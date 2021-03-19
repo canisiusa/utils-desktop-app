@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function Footer() {
+
   return (
     <div>
       <footer class="toolbar toolbar-footer">
@@ -25,6 +26,11 @@ export default function Footer() {
               />
             </svg>
             copyright v.1.00
+          </button>
+
+          <button className="btn btn-default" onClick={window.ipcRenderer.invoke('devtools:toogle')}>
+            <span class="icon icon-tools icon-text"></span>
+            Open Devtools
           </button>
 
           <button class="btn btn-primary pull-right">

@@ -11,9 +11,27 @@ export default class Titlebar extends Component {
     this.state = { isMaximized: false };
   }
 
-  close = () => console.log('close');
-  minimize = () => console.log('minimize');
-  toggleMaximize = () => this.setState({ isMaximized: !this.state.isMaximized });
+  close = () => {
+    console.log('close')
+    window.ipcRenderer.invoke('close-app')
+  };
+  minimize = () => {
+   window.ipcRenderer.invoke('minimize:toogle') 
+    console.log('minimize')
+  };
+  toggleMaximize = () => {
+    window.ipcRenderer.invoke('maximize:toogle').then(result =>{
+
+      this.setState({ isMaximized: result })
+    })
+  };
+  toggleRestore = () => {
+    window.ipcRenderer.invoke('restore:toogle').then(result => {
+      console.log(result)
+
+      this.setState({ isMaximized: result })
+    })
+  }
 
   render() {
     return (
@@ -26,7 +44,7 @@ export default class Titlebar extends Component {
         onCloseClick={this.close}
         onMinimizeClick={this.minimize}
         onMaximizeClick={this.toggleMaximize}
-        onRestoreDownClick={this.toggleMaximize}
+        onRestoreDownClick={this.toggleRestore}
       />
     );
   }

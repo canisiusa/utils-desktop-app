@@ -10,6 +10,9 @@ function createWindow() {
         height:600,
         show: false,
         frame: false,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js')
+        }
     });
     const startURL = isDev ? 'http://localhost:7000' : `file://${path.join(__dirname, '../build/index.html')}`;
 
@@ -29,7 +32,6 @@ function createWindow() {
         mainWindow = null;
     });
 }
-
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
@@ -50,8 +52,23 @@ app.on("activate", () => {
 });
 
 ipcMain.handle('close-app', () => {
-    console.log(mainWindow.webContents)
+    app.quit()
 });
+ipcMain.handle('devtools:toogle', () => {
+    mainWindow.webContents.openDevTools();
+});
+ipcMain.handle('minimize:toogle', () => {
+    mainWindow.minimize()
+});
+ipcMain.handle('maximize:toogle', () => {
+    mainWindow.maximize()
+    return mainWindow.isMaximized()
+}); 
+ipcMain.handle('restore:toogle', () => {
+    mainWindow.restore()
+    return mainWindow.isMaximized()
+}); 
+
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
