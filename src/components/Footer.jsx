@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+
 export default function Footer() {
 
   return (
@@ -28,7 +30,7 @@ export default function Footer() {
             copyright v.1.00
           </button>
 
-          <button className="btn btn-default" onClick={window.ipcRenderer.invoke('devtools:toogle')}>
+          <button className="btn btn-default" onClick={() => window.ipcRenderer.invoke('devtools:toogle')}>
             <span class="icon icon-tools icon-text"></span>
             Open Devtools
           </button>

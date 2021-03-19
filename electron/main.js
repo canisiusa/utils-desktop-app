@@ -18,10 +18,7 @@ function createWindow() {
 
     mainWindow.loadURL(startURL);
 
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools();
 
-    
     mainWindow.once('ready-to-show', () => mainWindow.show());
     
     // Emitted when the window is closed.

@@ -17,7 +17,6 @@ export default class Titlebar extends Component {
   };
   minimize = () => {
    window.ipcRenderer.invoke('minimize:toogle') 
-    console.log('minimize')
   };
   toggleMaximize = () => {
     window.ipcRenderer.invoke('maximize:toogle').then(result =>{
@@ -27,10 +26,12 @@ export default class Titlebar extends Component {
   };
   toggleRestore = () => {
     window.ipcRenderer.invoke('restore:toogle').then(result => {
-      console.log(result)
 
       this.setState({ isMaximized: result })
     })
+  }
+  componentDidMount(){
+    this.toggleMaximize()
   }
 
   render() {
